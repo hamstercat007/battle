@@ -5,11 +5,5 @@ feature 'View hit points' do
   end
 end 
 
-feature 'Reduce hit points' do 
-  scenario 'Attack to reduce Player 2\'s hit points by 10' do
-    sign_in_and_play
-    expect(page).to have_content 'Mittens: 50HP'
-  end
-end
 
     

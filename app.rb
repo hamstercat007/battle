@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require './lib/player.rb' #why is this needed, also works without for the time being??  require the Player class in your controller file, app.rb https://github.com/makersacademy/course/blob/main/intro_to_the_web/extracting_logic_to_the_model.md
+require './lib/game.rb'
 
 class Battle < Sinatra::Base
   enable :sessions
@@ -28,6 +29,7 @@ class Battle < Sinatra::Base
   get '/attack' do
     @game = $game
     @game.attack(@game.player_2)
+    @game.switch_turns
     erb :attack
   end
   # start the server if ruby file executed directly

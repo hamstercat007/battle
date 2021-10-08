@@ -1,11 +1,10 @@
-<br>
-<%# Player 1: <%= @game.player_1.name %> 
-<%# attacked <%= @game.player_2.name %> 
+<% if @game.current_turn == @game.player_1 %>
+  <%= @game.player_1.name %> attacked <%= @game.player_2.name %>
+<% else %>
+<%=@game.player_2.name %> attacked <%= @game.player_1.name %>
+<% end %>
 
-<%= @game.current_turn.name %> attacked <%= @game.players.select { |player| player != @game.current_turn}.first.name %>
-<br>
-
-<form action ="/play">
+<form action ="/switch-turns" method="post">
   <input type="submit" value="OK">
 </form>
 

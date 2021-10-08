@@ -7,7 +7,7 @@ feature 'Switch turns' do
     expect(page).to have_content('Charlotte\'s turn')
   end
 
-  scenario 'Player 1 attacks' do 
+  scenario 'after Player 1 attacks' do 
     click_button 'Attack'
     click_button 'OK'
     expect(page).not_to have_content ("Charlotte's turn")

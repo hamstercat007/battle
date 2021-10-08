@@ -26,8 +26,23 @@ class Game
     @players.select { |player| player != the_player }.first
   end
 
+  def game_over?
+    losing_players.any?
+  end 
+
+  def loser
+    losing_players.first
+  end 
+
+  def losing_players
+    players.select{|player| player.hit_points <=0}
+  end 
+
+  def players_who_are_not(the_player)
+    players.select {|player| player != the_player}
+  end 
+
   private
   attr_reader :players
-
   
 end 

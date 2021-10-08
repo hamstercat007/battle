@@ -30,6 +30,13 @@ describe Game do
     end
   end
 
+  describe '#opponent_of' do
+  it 'finds the opponent of a player' do
+    expect(game.opponent_of(game.player_1)).to eq game.player_2
+    expect(game.opponent_of(game.player_2)).to eq game.player_1
+  end
+end
+
   describe '#switch_turns' do
     it 'switches the turn' do
       game.switch_turns

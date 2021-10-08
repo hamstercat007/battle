@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
-require './lib/player.rb' #why is this needed, also works without for the time being??  require the Player class in your controller file, app.rb https://github.com/makersacademy/course/blob/main/intro_to_the_web/extracting_logic_to_the_model.md
+require './lib/player.rb' 
 require './lib/game.rb'
 
 class Battle < Sinatra::Base
@@ -18,11 +18,11 @@ class Battle < Sinatra::Base
     player_2 = Player.new(params[:player_2_name])
     $game = Game.new(player_1, player_2)
     @game = $game
-    redirect '/play'
+    redirect '/play'  # browser knows has to change url, as if user reloads page if the page was the same, re-executes code again
   end 
 
   get '/play' do 
-    @game = $game
+    @game = $game # instance variable used in erb page, need to be created for each route, as not really instance variables, cannot be seen everywhere
     erb :play 
   end 
 

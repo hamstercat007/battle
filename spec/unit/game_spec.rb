@@ -2,7 +2,7 @@ require 'game'
 
 describe Game do 
   let(:charlotte) { double("Player 1") }
-  let(:mittens) { double("Player 1") }
+  let(:mittens) { double("Player 2") }
   let(:game) { described_class.new(charlotte, mittens)}
 
   describe '#attack' do

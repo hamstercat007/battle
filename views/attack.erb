@@ -1,6 +1,10 @@
 <br>
-Player 1: <%= @game.player_1.name %> attacked <%= @game.player_2.name %>
+<%# Player 1: <%= @game.player_1.name %> 
+<%# attacked <%= @game.player_2.name %> 
+
+<%= @game.current_turn.name %> attacked <%= @game.players.select { |player| player != @game.current_turn}.first.name %>
 <br>
+
 <form action ="/play">
   <input type="submit" value="OK">
 </form>

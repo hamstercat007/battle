@@ -10,6 +10,10 @@ class Battle < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  before do
+    @game = Game.instance
+  end
+
   get '/' do 
     erb :index
   end 
@@ -17,19 +21,18 @@ class Battle < Sinatra::Base
   post '/names' do
     player_1 = Player.new(params[:player_1_name]) #creating a new instance, creating data = post
     player_2 = Player.new(params[:player_2_name])
-    $game = Game.new(player_1, player_2)
-    @game = $game
+    @game = Game.create(player_1, player_2)
     redirect '/play'  # browser knows has to change url, as if user reloads page if the page was the same, re-executes code again
   end 
 
   get '/play' do 
-    @game = $game # - this is simply reading,  instance variable used in erb page, need to be created for each route, as not really instance variables, cannot be seen everywhere
     erb :play 
   end 
 
   post '/attack' do
-    Attack.run($game.opponent_of($game.current_turn))
-    if $game.game_over?
+    @game = Game.instance
+    Attack.run(@game.opponent_of(@game.current_turn))
+    if @game.game_over?
       redirect '/game-over'
     else
       redirect '/attack'
@@ -37,17 +40,15 @@ class Battle < Sinatra::Base
   end 
 
   get '/attack' do
-    @game = $game 
     erb :attack
   end
 
   post '/switch-turns' do
-    $game.switch_turns   #changing data in my server, creating a command, should be a post, redirect or it will switch turns again 
+    @game.switch_turns   #changing data in my server, creating a command, should be a post, redirect or it will switch turns again 
     redirect('/play')
   end
 
   get '/game-over' do
-    @game = $game
     erb :game_over
   end
   # start the server if ruby file executed directly
